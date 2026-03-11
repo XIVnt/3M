@@ -1,0 +1,56 @@
+{
+  "Principales": [
+    {
+      "id": "1",
+      "name": "Hamburgesa Simple",
+      "image": "public/img/Ham-simple.png",
+      "price": "2.50"
+    },
+    {
+      "id": "2",
+      "name": "Hamburgesa Doble",
+      "image": "public/img/Ham-doble.png",
+      "price": "3.25"
+    },
+    {
+      "id": "3",
+      "name": "Hamburgesa Completa",
+      "image": "public/img/Ham-completa.png",
+      "price": "4.00"
+    },
+    {
+      "id": "4",
+      "name": "Salchipapa",
+      "image": "public/img/Salchi.png",
+      "price": "4.50"
+    }
+  ],
+  "Almuerzos": [
+    {
+      "id": "5",
+      "name": "Menestra de Carne",
+      "image": "public/img/Menes-Carne.png",
+      "price": "5.50"
+    },
+    {
+      "id": "6",
+      "name": "Menestra de Pollo",
+      "image": "public/img/Menes-Pollo.png",
+      "price": "5.50"
+    }
+  ],
+  "coffee": [
+    {
+      "id": "7",
+      "name": "Cappuccino",
+      "image": "public/img/cappuccino.png",
+      "price": "1.50"
+    },
+    {
+      "id": "8",
+      "name": "Latte",
+      "image": "public/img/latte.png",
+      "price": "1.80"
+    }
+  ]
+}
