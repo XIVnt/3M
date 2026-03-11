@@ -3,25 +3,25 @@
     {
       "id": "1",
       "name": "Hamburgesa Simple",
-      "image": "/img/Ham-simple.png",
+      "image": "img/Ham-simple.png",
       "price": "2.50"
     },
     {
       "id": "2",
       "name": "Hamburgesa Doble",
-      "image": "/img/Ham-doble.png",
+      "image": "img/Ham-doble.png",
       "price": "3.25"
     },
     {
       "id": "3",
       "name": "Hamburgesa Completa",
-      "image": "/img/Ham-completa.png",
+      "image": "img/Ham-completa.png",
       "price": "4.00"
     },
     {
       "id": "4",
       "name": "Salchipapa",
-      "image": "/img/Salchi.png",
+      "image": "img/Salchi.png",
       "price": "4.50"
     }
   ],
@@ -29,13 +29,13 @@
     {
       "id": "5",
       "name": "Menestra de Carne",
-      "image": "/img/Menes-Carne.png",
+      "image": "img/Menes-Carne.png",
       "price": "5.50"
     },
     {
       "id": "6",
       "name": "Menestra de Pollo",
-      "image": "/img/Menes-Pollo.png",
+      "image": "img/Menes-Pollo.png",
       "price": "5.50"
     }
   ],
@@ -43,13 +43,13 @@
     {
       "id": "7",
       "name": "Cappuccino",
-      "image": "/img/cappuccino.png",
+      "image": "img/cappuccino.png",
       "price": "1.50"
     },
     {
       "id": "8",
       "name": "Latte",
-      "image": "/img/latte.png",
+      "image": "img/latte.png",
       "price": "1.80"
     }
   ]
