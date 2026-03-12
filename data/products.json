@@ -39,7 +39,7 @@
       "price": "5.50"
     }
   ],
-  "coffee": [
+  "Cafés": [
     {
       "id": "7",
       "name": "Cappuccino",
@@ -83,19 +83,19 @@
     {
       "id": "13",
       "name": "Batido de Mora",
-      "image": "img/Beb-Agua.png",
+      "image": "img/Bat-Mora.png",
       "price": "1.50"
     },
     {
       "id": "14",
       "name": "Batido de Fresa",
-      "image": "img/Beb-Nestea.png",
+      "image": "img/Bat-Fres.png",
       "price": "1.50"
     },
     {
       "id": "15",
       "name": "Batido de Arándano",
-      "image": "img/Beb-Zen.png",
+      "image": "img/Bat-Aran.png",
       "price": "2.00"
     }
   ]
