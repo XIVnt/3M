@@ -52,5 +52,51 @@
       "image": "img/latte.png",
       "price": "1.80"
     }
+  ],
+  "Bebidas": [
+    {
+      "id": "9",
+      "name": "Agua Cielo",
+      "image": "img/Beb-Agua.png",
+      "price": "0.60"
+    },
+    {
+      "id": "10",
+      "name": "Nestea",
+      "image": "img/Beb-Nestea.png",
+      "price": "1.00"
+    },
+    {
+      "id": "11",
+      "name": "Limonada Zen",
+      "image": "img/Beb-Zen.png",
+      "price": "0.80"
+    },
+    {
+      "id": "12",
+      "name": "Agua Mineral Guitig",
+      "image": "img/Beb-Guitig.png",
+      "price": "1.00"
+    }
+  ],
+  "Batidos": [
+    {
+      "id": "13",
+      "name": "Batido de Mora",
+      "image": "img/Beb-Agua.png",
+      "price": "1.50"
+    },
+    {
+      "id": "14",
+      "name": "Batido de Fresa",
+      "image": "img/Beb-Nestea.png",
+      "price": "1.50"
+    },
+    {
+      "id": "15",
+      "name": "Batido de Arándano",
+      "image": "img/Beb-Zen.png",
+      "price": "2.00"
+    }
   ]
 }
