@@ -7,7 +7,7 @@ import { ToastProvider } from "./context/ToastContext"; // 🔥 NUEVO
 import App from "./App";
 
 import "./api/leafletFix";
-import "leaflet/dist/leaflet.css";
+import "leaflet/dist/leaflet.css?url";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
