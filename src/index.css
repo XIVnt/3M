@@ -511,11 +511,10 @@ body, html {
 .toast {
   position: fixed;
   bottom: 90px;
-
   right: 20px;
 
-  width: auto;
   max-width: 380px;
+  width: fit-content;
 
   padding: 14px 20px;
   border-radius: 14px;
@@ -527,17 +526,16 @@ body, html {
   z-index: 9999;
 
   opacity: 0;
-
   transform: translateX(120%);
 
-  transition: all 0.8s cubic-bezier(.22,1,.36,1);
+  transition: all 0.35s cubic-bezier(.22,1,.36,1);
 
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.12);
 }
 
 /* =========================
-   SHOW / HIDE (ANIMACIÓN)
+   SHOW / HIDE
 ========================= */
 
 .toast.show {
@@ -603,27 +601,31 @@ body, html {
 
 @media (max-width: 768px) {
   .toast {
+    position: fixed;
+
+    bottom: 20px;
     left: 50%;
+
+    width: 300px;
+    height: 45px;
+
+    margin-left: 20%; /* CENTRADO REAL SIN TRANSFORM */
+
+    top: auto;
     right: auto;
 
-    bottom: 80px;
-
-    max-width: 340px;
-    width: calc(100% - 32px);
-
-    padding: 12px 16px;
-
-    transform: translateX(-50%) translateY(20px);
+    max-width: 90%;
+    font-size: 0.85rem;
+    padding: 12px 14px;
+    margin-top: 900px;
   }
 
   .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0px);
   }
 
   .toast.hide {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
+    transform: translateY(20px);
   }
 }
 
