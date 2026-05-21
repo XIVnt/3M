@@ -9,7 +9,6 @@ import {
 } from "react-leaflet";
 
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 
 type LatLng = { lat: number; lng: number };
 
@@ -148,7 +147,7 @@ export default function DeliveryMap({
             icon={userIcon}
             draggable={!isRecoger}
             eventHandlers={{
-              dragend: (e) => {
+              dragend: (e:any) => {
                 const pos = e.target.getLatLng();
 
                 const newPos = {
