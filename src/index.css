@@ -36,6 +36,8 @@ body{
   max-width:1000px;
   margin:auto;
   padding:30px;
+
+  padding-bottom:120px;
 }
 
 .img {
@@ -482,63 +484,117 @@ body{
   box-shadow: 0 0 10px #9333ea, 0 0 20px #22c55e;
   transform: scale(1.05);
 }
+/* =========================
+   BASE TOAST
+========================= */
+
 .toast {
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   right: 20px;
-  background: #22c55e; 
-  color: #0b0b12; 
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #22c55e, 0 0 20px #9333ea;
-  font-weight: 600;
-  z-index: 999;
-  animation: slideIn 0.3s, fadeOut 0.3s 1.7s forwards;
+
+  min-width: 260px;
+  max-width: 380px;
+
+  padding: 14px 20px;
+  border-radius: 14px;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.4;
+
+  z-index: 9999;
+
+  opacity: 0;
+  transform: translateX(120%);
+
+  transition: all 0.8s cubic-bezier(.22,1,.36,1);
+
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
+/* =========================
+   SHOW / HIDE (ANIMACIÓN)
+========================= */
 
-/* ===== VARIANTS ===== */
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast.hide {
+  opacity: 0;
+  transform: translateX(120%);
+}
+
+/* =========================
+   SUCCESS
+========================= */
 
 .toast-success {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: #0b0b12; 
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #22c55e, 0 0 20px #9333ea;
-  font-weight: 600;
-  z-index: 999;
-  animation: slideIn 0.3s, fadeOut 0.3s 1.7s forwards;
-  background: rgba(34, 197, 94, 0.9);
+  color: #0b0b12;
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.95),
+    rgba(16, 185, 129, 0.92)
+  );
+
+  box-shadow:
+    0 0 14px rgba(34, 197, 94, 0.6),
+    0 0 28px rgba(147, 51, 234, 0.35);
 }
+
+/* =========================
+   ERROR
+========================= */
 
 .toast-error {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: #0b0b12; 
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #22c55e, 0 0 20px #9333ea;
-  font-weight: 600;
-  z-index: 999;
-  animation: slideIn 0.3s, fadeOut 0.3s 1.7s forwards;
-  background: rgba(239, 68, 68, 0.92);
+  color: #0b0b12;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.95),
+    rgba(220, 38, 38, 0.92)
+  );
+
+  box-shadow:
+    0 0 14px rgba(239, 68, 68, 0.6),
+    0 0 28px rgba(147, 51, 234, 0.35);
 }
 
+/* =========================
+   INFO
+========================= */
+
 .toast-info {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: #0b0b12; 
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px #22c55e, 0 0 20px #9333ea;
-  font-weight: 600;
-  z-index: 999;
-  animation: slideIn 0.3s, fadeOut 0.3s 1.7s forwards;
-  background: rgba(59, 130, 246, 0.92);
+  color: #0b0b12;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.95),
+    rgba(147, 51, 234, 0.92)
+  );
+
+  box-shadow:
+    0 0 14px rgba(59, 130, 246, 0.55),
+    0 0 28px rgba(34, 197, 94, 0.3);
+}
+
+@media (max-width: 768px) {
+  .toast {
+    right: 50%;
+    bottom: 80px;
+    transform: translateX(50%);
+    width: calc(100vw - 32px);
+    max-width: 340px;
+  }
+
+  .toast.show {
+    transform: translateX(50%);
+  }
+
+  .toast.hide {
+    transform: translateX(50%) translateY(20px);
+  }
 }
 
 .order-cancel-button {
@@ -1437,11 +1493,23 @@ body{
   width: 120px; /* equilibrio visual */
 }
 
-@media (max-width: 600px) {
-  .app-footer {
-    flex-direction: column;
-    gap: 5px;
+@media (max-width: 768px){
+
+  .app-footer{
+    padding:10px 14px;
+
+    font-size:.78rem;
+    gap:8px;
   }
+
+  .footer-link{
+    font-size:.72rem;
+  }
+
+  .footer-separator{
+    display:none;
+  }
+
 }
 
 /* IZQUIERDA */

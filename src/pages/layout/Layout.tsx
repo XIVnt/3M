@@ -259,7 +259,10 @@ export default function Layout() {
 
         {/* NAV + CONTENT */}
         <CategoryMenu />
-        <Outlet />
+
+        <main className="main-content">
+          <Outlet />
+        </main>
         <footer className="app-footer">
           <div className="footer-left">
             © {new Date().getFullYear()} 3M Fast Food

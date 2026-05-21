@@ -13,7 +13,6 @@ export default function CartPage() {
     total,
     clearCart,
     order,
-    setOrder,
   } = useCart();
 
   const { showToast } = useToast();
