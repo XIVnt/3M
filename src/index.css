@@ -1517,23 +1517,40 @@ body, html {
   width: 120px; /* equilibrio visual */
 }
 
-@media (max-width: 768px){
-
-  .app-footer{
-    padding:10px 14px;
-
-    font-size:.78rem;
-    gap:8px;
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
   }
 
-  .footer-link{
-    font-size:.72rem;
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    width: 100%;
+    text-align: center;
   }
 
-  .footer-separator{
-    display:none;
+  .footer-center {
+    display: flex;
+    flex-direction: column; /* 👈 clave */
+    gap: 6px;
+    align-items: center;
   }
 
+  .footer-separator {
+    display: none; /* quita el "|" en móvil */
+  }
+
+  .footer-link {
+    font-size: 0.75rem;
+  }
+
+  .app-footer {
+    padding: 14px 16px;
+  }
 }
 
 /* IZQUIERDA */
