@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://localhost:7068/api",
+  baseURL: "https://threembackend.onrender.com/api",
 });
 
 // ===================== STATE =====================
@@ -69,7 +69,7 @@ api.interceptors.response.use(
       refreshAttempts++;
 
       refreshPromise = axios
-        .post("https://localhost:7068/api/usuarios/refresh-token", {
+        .post("https://threembackend.onrender.com/api/usuarios/refresh-token", {
           token: refreshToken,
         })
         .then((res) => {
