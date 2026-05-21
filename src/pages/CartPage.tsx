@@ -109,20 +109,23 @@ export default function CartPage() {
     console.log("PAYLOAD:", payload);
 
     try {
-      await api.post("/pedidos", payload);
+      await api.post("/pedidos", payload, {
+        timeout: 60000,
+      });
 
       clearCart();
       setOrderSuccess(true);
-
-      // guardar comentario en contexto también (persistencia UX)
-      setOrder({
-        comentario: comment,
-      });
-
       showToast("Pedido realizado correctamente", "success");
+
     } catch (err: any) {
       console.error(err);
-      console.log(err.response?.data);
+
+      if (err.code === "ECONNABORTED") {
+        showToast("El servidor está tardando, pero el pedido puede haberse creado", "info");
+        setOrderSuccess(true); // 👈 opcional UX recovery
+        clearCart();
+        return;
+      }
 
       showToast("Error al enviar el pedido", "error");
     }
