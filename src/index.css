@@ -601,26 +601,14 @@ body, html {
 
 @media (max-width: 768px) {
   .toast {
-    right: 50%;
-    bottom: 80px;
-    transform: translateX(50%);
-    width: calc(100vw - 32px);
-    max-width: 340px;
-  }
-
-  .toast.show {
-    transform: translateX(50%);
-  }
-
-  .toast.hide {
-    transform: translateX(50%) translateY(20px);@media (max-width: 768px) {
-  .toast {
-    right: 16px;
     left: 16px;
+    right: 16px;
     bottom: 80px;
 
     width: auto;
     max-width: 100%;
+
+    min-width: unset;
 
     transform: none;
   }
@@ -631,8 +619,6 @@ body, html {
 
   .toast.hide {
     transform: translateY(20px);
-  }
-}
   }
 }
 
