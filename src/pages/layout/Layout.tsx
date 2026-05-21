@@ -264,27 +264,28 @@ export default function Layout() {
           <Outlet />
         </main>
         <footer className="app-footer">
-          <div className="footer-left">
-            © {new Date().getFullYear()} 3M Fast Food
-          </div>
+          <div className="footer-inner">
+            <div className="footer-left">
+              © {new Date().getFullYear()} 3M Fast Food
+            </div>
 
-          <div className="footer-center">
-            <button onClick={() => navigate("/uso")} className="footer-link">
-              Política de uso
-            </button>
+            <div className="footer-center">
+              <button onClick={() => navigate("/uso")} className="footer-link">
+                Política de uso
+              </button>
 
-            <span className="footer-separator">|</span>
+              <span className="footer-separator">|</span>
 
-            <button onClick={() => navigate("/datos")} className="footer-link">
-              Protección de datos
-            </button>
+              <button onClick={() => navigate("/datos")} className="footer-link">
+                Protección de datos
+              </button>
+            </div>
 
-          </div>
-
-          <div className="footer-right">
-            <button className="footer-link">
-              v1.0.0
-            </button>
+            <div className="footer-right">
+              <button className="footer-link">
+                v1.0.0
+              </button>
+            </div>
           </div>
         </footer>
       </div>
