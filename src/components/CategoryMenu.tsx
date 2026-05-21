@@ -7,6 +7,7 @@ export default function CategoryMenu() {
         <Link to="/">Inicio</Link>
         <Link to="/pedir">Pedir</Link>
         <Link to="/sobre-nosotros">Sobre Nosotros</Link>
+        <Link to="/contacto">Contacto</Link>
       </div>
   );
 }

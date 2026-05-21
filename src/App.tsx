@@ -12,6 +12,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AdminPage from "./pages/AdminPage";
 import EmployeePage from "./pages/EmployeePage";
 import CartPage from "./pages/CartPage";
+import ContactPage from "./components/ContactPage"
 
 // AUTH PAGES
 import VerifyRegisterPage from "./components/Verify-register";
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/pedir" element={<OrderPage />} />
         <Route path="/sobre-nosotros" element={<SobreNosotros />} />
         <Route path="/carrito" element={<CartPage />} />
+        <Route path="/contacto" element={<ContactPage />} />
 
         {/* USER ROUTES */}
         <Route

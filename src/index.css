@@ -657,64 +657,297 @@ body{
 }
 
 /* Contenedor general */
-.sobre-nosotros-container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 30px;
+.about-page {
+  background: #0b0b12;
   color: #eaeaff;
-}
-
-.sobre-nosotros-section {
+  padding: 80px 20px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  flex-direction: column;
+  gap: 80px;
 }
 
-.sobre-nosotros-section.reverse-true {
+/* ================= HERO ================= */
+.about-hero {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-hero h1 {
+  font-size: 44px;
+  color: #c084fc;
+  text-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+}
+
+.about-hero p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #d1d1ff;
+  opacity: 0.9;
+}
+
+/* ================= BLOCK BASE ================= */
+.about-block {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-card {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  padding: 40px;
+  border-radius: 20px;
+
+  background: rgba(18, 18, 26, 0.75);
+  border: 1px solid rgba(147, 51, 234, 0.2);
+
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.12);
+  backdrop-filter: blur(10px);
+
+  transition: 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+}
+
+/* reverse layout */
+.reverse .about-card {
   flex-direction: row-reverse;
 }
 
-.sobre-nosotros-img {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #22c55e, 0 0 20px #9333ea;
+/* ================= IMAGES ================= */
+.about-card img {
+  width: 340px;
+  height: 260px;
   object-fit: cover;
+  border-radius: 18px;
+
+  border: 2px solid rgba(147, 51, 234, 0.3);
 }
 
-.sobre-nosotros-text {
-  color: #ffbb33; 
-  text-shadow:
-    0 0 5px #ffbb33,
-    0 0 10px #ff8800,
-    0 0 20px #ff6600,
-    0 0 30px #ff4400;
+/* ================= TEXT ================= */
+.about-card h2 {
+  color: #c084fc;
+  margin-bottom: 10px;
 }
 
-.sobre-nosotros-text p {
-  color: #22c55e; 
-  text-shadow:
-    0 0 4px #22c55e;
+.about-card p {
+  color: #d1d1ff;
+  line-height: 1.7;
+}
+
+/* ================= EVOLUTION SECTION ================= */
+.about-evolution {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 28px;
+  color: #22c55e;
+  margin-bottom: 30px;
+}
+
+.evo-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.evo-item {
+  background: rgba(18, 18, 26, 0.7);
+  padding: 15px;
+  border-radius: 16px;
+  border: 1px solid rgba(34, 197, 94, 0.15);
+}
+
+.evo-item img {
+  width: 240px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.evo-item span {
+  display: block;
+  margin-top: 10px;
+  color: #a7f3d0;
+}
+
+.evo-arrow {
+  font-size: 28px;
+  color: #c084fc;
+}
+
+.evo-item.highlight {
+  border-color: rgba(147, 51, 234, 0.4);
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.2);
+}
+
+.evo-text {
+  margin-top: 25px;
+  color: #d1d1ff;
+  opacity: 0.9;
   line-height: 1.6;
 }
 
-.sobre-nosotros-text h2 {
-  color: #c084fc; 
-  text-shadow:
-    0 0 5px #c084fc,
-    0 0 10px #9333ea,
-    0 0 15px #c084fc;
-  margin-bottom: 12px;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .about-card {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .evo-grid {
+    flex-direction: column;
+  }
+
+  .evo-arrow {
+    transform: rotate(90deg);
+  }
 }
 
-.sobre-nosotros-section.actualidad {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  gap: 1rem;
+/*Contact page*/
+
+/* =========================
+   BASE PAGE
+========================= */
+.contact-page {
+  padding: 40px 20px;
+  background: radial-gradient(circle at top, #0b0b12, #07070d);
+  color: #eaeaff;
+  min-height: 100vh;
 }
+
+/* TITLE */
+.contact-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #c084fc;
+  text-shadow: 0 0 10px #9333ea;
+}
+
+/* =========================
+   CARDS
+========================= */
+.contact-card {
+  background: rgba(18, 18, 26, 0.9);
+  border: 1px solid rgba(147, 51, 234, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.glow-purple {
+  border-color: #9333ea;
+  box-shadow: 0 0 25px rgba(147, 51, 234, 0.25);
+}
+
+.glow-green {
+  border-color: #22c55e;
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
+}
+
+/* =========================
+   SELECT
+========================= */
+.contact-select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #0b0b12;
+  color: #eaeaff;
+  border: 1px solid #9333ea;
+  outline: none;
+}
+
+/* =========================
+   GRID
+========================= */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* MAP */
+.contact-map {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #22c55e;
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+.contact-card textarea {
+  width: 100%;
+  min-height: 120px;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #0b0b12;
+  border: 1px solid #9333ea;
+  color: #eaeaff;
+  outline: none;
+  resize: none;
+}
+
+/* BUTTON */
+.contact-button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #9333ea, #22c55e);
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.contact-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #9333ea;
+}
+
+/* STATUS */
+.ok {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.off {
+  color: #ff4d6d;
+  font-weight: bold;
+}
+
+/* NOTE */
+.contact-note {
+  font-size: 13px;
+  color: #a7f3d0;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .contact-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .neon-border {
   border: 1px solid rgba(255, 165, 0, 0.6); 
