@@ -4,6 +4,7 @@ import api from "./axios";
 
 import type { Pedido } from "../components/types/Pedido";
 import type { PedidoCreate } from "../components/types/PedidoCreate";
+import type { MetodoPagoDTO } from "../components/types/MetodoPagoDto";
 
 /* =====================================================
    CREAR PEDIDO
@@ -86,7 +87,7 @@ export const toggleEstadoPago = marcarPagoCompletado;
 ===================================================== */
 
 export const getMetodosPago = () => {
-  return api.get<string[]>("/pedidos/metodos-pago");
+  return api.get<MetodoPagoDTO[]>("/pedidos/metodos-pago");
 };
 
 export const toggleMetodoPago = (id: number) => {

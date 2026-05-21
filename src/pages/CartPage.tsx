@@ -23,15 +23,19 @@ export default function CartPage() {
   // =========================
   // MÉTODOS DE PAGO (DINÁMICO)
   // =========================
-  const MetodoPago = {
-    Efectivo: 0,
-    Tarjeta: 1,
-  } as const;
-
-  type MetodoPagoKey = keyof typeof MetodoPago;
-
   const [availableMethods, setAvailableMethods] = useState<number[]>([]);
-  const [payment, setPayment] = useState<MetodoPagoKey | null>(null);
+
+  const MetodoPagoLabel: Record<number, string> = {
+    1: "Efectivo",
+    2: "Deuna API",
+  };
+    
+  const [payment, setPayment] = useState<number | null>(null);
+
+  const MetodoPagoIcon: Record<number, string> = {
+    1: "💵",
+    2: "💳",
+  };
 
   const [orderSuccess, setOrderSuccess] = useState(false);
 
@@ -47,7 +51,11 @@ export default function CartPage() {
     const loadMethods = async () => {
       try {
         const res = await getMetodosPago();
-        setAvailableMethods(res.data.map(Number));
+        setAvailableMethods(
+          res.data
+            .filter(m => m.activo)
+            .map(m => m.id)
+        );
       } catch (err) {
         console.error(err);
       }
@@ -90,8 +98,7 @@ export default function CartPage() {
 
       servicio: order.service,
 
-      metodoPago: payment ? MetodoPago[payment] : null,
-
+      metodoPago: payment,
       location: order.location,
 
       productos: cart.map((p) => ({
@@ -192,32 +199,30 @@ export default function CartPage() {
 
       {/* PAYMENT */}
       <div className="option-group">
-        {Object.entries(MetodoPago).map(([key, value]) => {
-          const isAvailable = availableMethods.includes(value);
+        {Object.entries(MetodoPagoLabel).map(([key, label]) => {
+          const id = Number(key);
+          const isAvailable = availableMethods.includes(id);
 
           return (
             <div
-              key={key}
-              className={`option-card ${
-                payment === key ? "active" : ""
-              }`}
+              key={id}
+              className={`option-card ${payment === id ? "active" : ""}`}
               onClick={() => {
                 if (!isAvailable) return;
-                setPayment(key as MetodoPagoKey);
+                setPayment(id);
               }}
               style={{
-                opacity: isAvailable ? 1 : 0.3,
+                opacity: isAvailable ? 1 : 0.4,
                 cursor: isAvailable ? "pointer" : "not-allowed",
                 border:
-                  payment === key
-                    ? "1px solid #22c55e"
-                    : "1px solid transparent",
+                  payment === id ? "1px solid #22c55e" : "1px solid transparent",
               }}
             >
-              {key === "Efectivo" ? "💵" : "💳"} {key}
+              {MetodoPagoIcon[id]} {label}
+
               {!isAvailable && (
                 <div style={{ fontSize: "10px", color: "#ff4d6d" }}>
-                  No disponible
+                  Próximamente
                 </div>
               )}
             </div>

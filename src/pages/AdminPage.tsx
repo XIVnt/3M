@@ -32,6 +32,11 @@ import {
   getFacturaById,
 } from "../api/facturaService";
 
+import {
+  getMetodosPago,
+  toggleMetodoPago,
+} from "../api/pedidosService";
+
 import { useToast } from "../context/ToastContext";
 
 import RestaurantCarousel from "../components/RestaurantCarousel";
@@ -39,6 +44,7 @@ import RestaurantCarousel from "../components/RestaurantCarousel";
 import type { ProductApi } from "../api/productService";
 import type { UserApi } from "../api/userService";
 import type { Restaurante } from "../components/types/Restaurant";
+import type { MetodoPagoDTO } from "../components/types/MetodoPagoDto";
 
 // ===================== FACTURA TYPE =====================
 type Factura = {
@@ -47,6 +53,11 @@ type Factura = {
   fecha?: string;
   estado?: string;
   usuarioEmail?: string;
+};
+
+const MetodoPagoLabel: Record<number , string> = {
+  0: "Efectivo",
+  1: "Deuna API",
 };
 
 // ===================== COMPONENT =====================
@@ -76,6 +87,7 @@ export default function AdminPage() {
     | "facturas"
     | "restaurantes"
     | "createRestaurante"
+    | "metodosPago"
   >("list");
 
   const [actionLoading, setActionLoading] = useState(false);
@@ -106,6 +118,11 @@ export default function AdminPage() {
   const [precio, setPrecio] = useState("");
   const [tipo, setTipo] = useState("");
   const [image, setImage] = useState<File | null>(null);
+
+  const [metodosPago, setMetodosPago] = useState<MetodoPagoDTO[]>([]);
+
+// ===================== PAY METHOT =====================
+  const [loadingMetodosPago, setLoadingMetodosPago] = useState(false);
 
   const allowedRoles = ["administrador", "empleado"];
 
@@ -164,6 +181,12 @@ export default function AdminPage() {
 
     return () => clearTimeout(t);
   }, [facturaSearch, view]);
+
+  useEffect(() => {
+    if (view === "metodosPago") {
+      loadMetodosPago();
+    }
+  }, [view]);
 
   // ===================== HELPERS =====================
   const parsePrice = (value: string) =>
@@ -233,6 +256,22 @@ export default function AdminPage() {
       showToast("❌ Factura no encontrada", "error");
     } finally {
       setLoadingFacturas(false);
+    }
+  };
+
+  // ===================== LOAD PAY METHOTS =====================
+
+  const loadMetodosPago = async () => {
+    setLoadingMetodosPago(true);
+
+    try {
+      const res = await getMetodosPago();
+      setMetodosPago(res.data ?? []);
+    } catch (err) {
+      console.error(err);
+      showToast("❌ Error cargando métodos de pago", "error");
+    } finally {
+      setLoadingMetodosPago(false);
     }
   };
 
@@ -559,15 +598,22 @@ export default function AdminPage() {
         </button>
 
         <button
-          className={`admin-nav-btn ${
-            view === "createRestaurante" ? "active" : ""
-          }`}
+          className={`admin-nav-btn ${view === "createRestaurante" ? "active" : ""
+            }`}
           onClick={() => {
             setEditingRestaurante(null);
             setView("createRestaurante");
           }}
         >
           🏪 Crear Restaurantes
+        </button>
+        <button
+          className={`admin-nav-btn ${
+            view === "metodosPago" ? "active" : ""
+          }`}
+          onClick={() => setView("metodosPago")}
+        >
+          💳 Métodos de Pago
         </button>
       </aside>
 
@@ -986,6 +1032,52 @@ export default function AdminPage() {
                   ? "Actualizar restaurante"
                   : "Crear restaurante"}
               </button>
+            </div>
+          </div>
+        )}
+        {/* ===================== METODOS DE PAGO ===================== */}
+        {view === "metodosPago" && (
+          <div className="admin-card">
+            <h2>Métodos de Pago</h2>
+
+            {loadingMetodosPago && (
+              <p className="muted">Cargando métodos...</p>
+            )}
+
+            <div className="product-list">
+              {metodosPago.map((m) => (
+                <div key={m.id} className="product-item">
+                  <div>
+                    <b>{MetodoPagoLabel[m.metodo]}</b>
+
+                    <p className="muted">
+                      Estado:{" "}
+                      <span style={{ color: m.activo ? "#22c55e" : "#ef4444" }}>
+                        {m.activo ? "Activo" : "Desactivado"}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="actions">
+                    <button
+                      className="icon-btn"
+                      onClick={async () => {
+                        await toggleMetodoPago(m.id);
+                        await loadMetodosPago();
+
+                        showToast(
+                          m.activo
+                            ? "❌ Método desactivado"
+                            : "✅ Método activado",
+                          "info"
+                        );
+                      }}
+                    >
+                      {m.activo ? "🔴" : "🟢"}
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}
