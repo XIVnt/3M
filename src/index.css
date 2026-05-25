@@ -1202,6 +1202,25 @@ body, html {
   width: 100%;
 }
 
+.toggle-text {
+  margin-top: 12px;
+  text-align: center;
+  color: #c084fc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.toggle-text:hover {
+  color: #a855f7;
+  text-decoration: underline;
+  transform: scale(1.02);
+}
+
+.toggle-text:active {
+  transform: scale(0.98);
+}
+
 /* CartPage */
 
 .option-group {

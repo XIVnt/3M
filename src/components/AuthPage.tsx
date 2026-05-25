@@ -61,7 +61,7 @@ export default function AuthPage() {
       // 🔥 ESTE ES EL CASO CLAVE
       if (data?.requireCaptcha) {
         setRequireCaptcha(true);
-        setError("Completa la verificación y vuelve a intentar");
+        setError("Vuelve a intentar");
         return;
       }
 
@@ -78,7 +78,13 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="login-container">
+    <form
+      className="login-container"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
       <h2>{mode === "login" ? "Iniciar sesión" : "Registro"}</h2>
 
       <input
@@ -139,7 +145,7 @@ export default function AuthPage() {
 
       <button
         className="primary-btn"
-        onClick={handleSubmit}
+        type="submit"
         disabled={loading}
       >
         {loading
@@ -165,6 +171,6 @@ export default function AuthPage() {
           ? "¿No tienes cuenta? Regístrate"
           : "¿Ya tienes cuenta? Inicia sesión"}
       </p>
-    </div>
+    </form>
   );
 }
