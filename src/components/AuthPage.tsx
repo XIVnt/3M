@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // ===================== 🔐 SANITIZER =====================
 const sanitize = (value: string) =>
@@ -23,6 +24,7 @@ export default function AuthPage() {
 
   const navigate = useNavigate();
   const { setToken } = useAuth();
+  const RECAPTCHA_SITE_KEY = "6Lf4zvssAAAAAPS6DGEehuXlBN-03XRfdE5gKmP2";
 
   const handleSubmit = async () => {
     if (loading) return;
@@ -172,12 +174,14 @@ export default function AuthPage() {
       )}
 
       {requireCaptcha && (
-        <div>
-          <p>CAPTCHA requerido</p>
-          <input
-            className="input"
-            value={captchaToken}
-            onChange={(e) => setCaptchaToken(e.target.value)}
+        <div style={{ marginTop: 10 }}>
+          <p>Verificación requerida</p>
+
+          <ReCAPTCHA
+            sitekey={RECAPTCHA_SITE_KEY}
+            onChange={(token) => {
+              setCaptchaToken(token || "");
+            }}
           />
         </div>
       )}
