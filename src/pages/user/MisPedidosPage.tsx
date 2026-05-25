@@ -199,7 +199,7 @@ export default function MisPedidos() {
               Pedido #{detallePedido?.id}
             </span>
             <span className="order-total">
-              {detallePedido?.total} €
+              {detallePedido?.total} $
             </span>
           </div>
 
@@ -235,7 +235,7 @@ export default function MisPedidos() {
                 </span>
 
                 <span className="order-total">
-                  {pp.precioUnitario} €
+                  {pp.precioUnitario} $
                 </span>
               </div>
 
@@ -273,7 +273,7 @@ export default function MisPedidos() {
             </span>
 
             <span className="order-total">
-              {detalleFactura?.total} €
+              {detalleFactura?.total} $
             </span>
           </div>
 
@@ -334,12 +334,12 @@ export default function MisPedidos() {
             >
               <div style={{ marginBottom: 6 }}>
                 <b>Subtotal:</b>{" "}
-                {(detalleFactura?.pedido?.total * 0.85).toFixed(2)} €
+                {(detalleFactura?.pedido?.total * 0.85).toFixed(2)} $
               </div>
 
               <div style={{ marginBottom: 6 }}>
                 <b>IVA (15%):</b>{" "}
-                {(detalleFactura?.pedido?.total * 0.15).toFixed(2)} €
+                {(detalleFactura?.pedido?.total * 0.15).toFixed(2)} $
               </div>
 
               <div
@@ -350,7 +350,7 @@ export default function MisPedidos() {
                 }}
               >
                 <b>Total:</b>{" "}
-                {detalleFactura?.pedido?.total.toFixed(2)} €
+                {detalleFactura?.pedido?.total.toFixed(2)} $
               </div>
             </div>
 
@@ -370,7 +370,7 @@ export default function MisPedidos() {
                 </span>
 
                 <span className="order-total">
-                  {p.precioUnitario} €
+                  {p.precioUnitario} $
                 </span>
               </div>
 
@@ -478,7 +478,7 @@ export default function MisPedidos() {
                     </span>
 
                     <span className="order-total">
-                      {p.total} €
+                      {p.total} $
                     </span>
 
                   </div>
@@ -518,7 +518,7 @@ export default function MisPedidos() {
                     </span>
 
                     <span className="order-total">
-                      {f.total} €
+                      {f.total} $
                     </span>
 
                   </div>
