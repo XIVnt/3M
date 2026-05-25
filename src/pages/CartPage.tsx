@@ -54,7 +54,7 @@ export default function CartPage() {
         setAvailableMethods(
           res.data
             .filter(m => m.activo)
-            .map(m => m.id)
+            .map(m => m.metodo)
         );
       } catch (err) {
         console.error(err);
