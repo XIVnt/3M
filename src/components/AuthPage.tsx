@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 // ===================== 🔐 SANITIZER =====================
 const sanitize = (value: string) =>
@@ -12,8 +12,6 @@ export default function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [telefono, setTelefono] = useState("");
-
-  const [captchaToken, setCaptchaToken] = useState("");
   const [requireCaptcha, setRequireCaptcha] = useState(false);
 
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
@@ -24,7 +22,7 @@ export default function AuthPage() {
 
   const navigate = useNavigate();
   const { setToken } = useAuth();
-  const RECAPTCHA_SITE_KEY = "6Lf4zvssAAAAAPS6DGEehuXlBN-03XRfdE5gKmP2";
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = async () => {
     if (loading) return;
@@ -56,14 +54,18 @@ export default function AuthPage() {
     try {
       // ===================== LOGIN =====================
       if (mode === "login") {
+        let captchaToken = "";
+
+        // SOLO si backend lo pide
+        if (requireCaptcha && executeRecaptcha) {
+          captchaToken = await executeRecaptcha("login");
+        }
+
         const payload: any = {
           email: cleanEmail,
           password: cleanPassword,
+          captchaToken: captchaToken || undefined,
         };
-
-        if (requireCaptcha && captchaToken.trim()) {
-          payload.captchaToken = captchaToken.trim();
-        }
 
         const res = await api.post("/usuarios/login", payload);
 
@@ -71,7 +73,6 @@ export default function AuthPage() {
         localStorage.setItem("refreshToken", res.data.refreshToken);
 
         setRequireCaptcha(false);
-        setCaptchaToken("");
 
         navigate("/");
       }
@@ -171,19 +172,6 @@ export default function AuthPage() {
             </label>
           </div>
         </>
-      )}
-
-      {requireCaptcha && (
-        <div style={{ marginTop: 10 }}>
-          <p>Verificación requerida</p>
-
-          <ReCAPTCHA
-            sitekey={RECAPTCHA_SITE_KEY}
-            onChange={(token) => {
-              setCaptchaToken(token || "");
-            }}
-          />
-        </div>
       )}
 
       {error && <p className="error-text">{error}</p>}
