@@ -25,78 +25,43 @@ export default function AuthPage() {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const handleSubmit = async () => {
-    if (loading) return;
+  if (loading) return;
 
-    setError("");
+  setError("");
+  setLoading(true);
 
+  try {
     const cleanEmail = sanitize(email).toLowerCase();
     const cleanPassword = sanitize(password);
-    const cleanTelefono = sanitize(telefono);
 
-    if (!cleanEmail || !cleanPassword) {
-      setError("Email y contraseña son obligatorios");
-      return;
+    let captchaToken = "";
+
+    if (requireCaptcha && executeRecaptcha) {
+      captchaToken = await executeRecaptcha("login");
     }
 
-    if (mode === "register" && !cleanTelefono) {
-      setError("El teléfono es obligatorio");
-      return;
-    }
+    const payload: any = {
+      email: cleanEmail,
+      password: cleanPassword,
+      captchaToken: captchaToken || undefined,
+    };
 
-    // 🔥 POLÍTICAS OBLIGATORIAS
-    if (mode === "register" && !acceptedPolicies) {
-      setError("Debes aceptar los términos de uso y la política de privacidad");
-      return;
-    }
+    const res = await api.post("/usuarios/login", payload);
 
-    setLoading(true);
+    setToken(res.data.token);
+    localStorage.setItem("refreshToken", res.data.refreshToken);
 
-    try {
-      // ===================== LOGIN =====================
-      if (mode === "login") {
-        let captchaToken = "";
-
-        // SOLO si backend lo pide
-        if (requireCaptcha && executeRecaptcha) {
-          captchaToken = await executeRecaptcha("login");
-        }
-
-        const payload: any = {
-          email: cleanEmail,
-          password: cleanPassword,
-          captchaToken: captchaToken || undefined,
-        };
-
-        const res = await api.post("/usuarios/login", payload);
-
-        setToken(res.data.token);
-        localStorage.setItem("refreshToken", res.data.refreshToken);
-
-        setRequireCaptcha(false);
-
-        navigate("/");
-      }
-
-      // ===================== REGISTER =====================
-      else {
-        await api.post("/usuarios/request-register", {
-          email: cleanEmail,
-          password: cleanPassword,
-          telefono: cleanTelefono,
-          userName: cleanEmail.split("@")[0],
-        });
-
-        sessionStorage.setItem("pendingEmail", cleanEmail);
-
-        navigate("/verify-register");
-      }
-    } catch (err: any) {
+    setRequireCaptcha(false);
+    navigate("/");
+    } 
+    catch (err: any) {
       const data = err?.response?.data;
       const status = err?.response?.status;
 
+      // 🔥 ESTE ES EL CASO CLAVE
       if (data?.requireCaptcha) {
         setRequireCaptcha(true);
-        setError("Completa el CAPTCHA");
+        setError("Completa la verificación y vuelve a intentar");
         return;
       }
 
@@ -105,13 +70,9 @@ export default function AuthPage() {
         return;
       }
 
-      if (status === 403) {
-        setError("Acceso bloqueado");
-        return;
-      }
-
       setError(data?.message || "Error en la operación");
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };
