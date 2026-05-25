@@ -422,6 +422,22 @@ body, html {
   transform: scale(1.1);
 }
 
+.success-button {
+  background: transparent;
+  border: 1px solid #22c55e;
+  color: #22c55e;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 2px 8px;
+  transition: all 0.25s ease;
+}
+
+.success-button:hover {
+  color: #86efac;
+  border-color: #86efac;
+  transform: scale(1.1);
+}
+
 .cart-total {
   margin-top: 15px;
   font-size: 18px;

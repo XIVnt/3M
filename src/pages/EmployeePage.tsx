@@ -389,7 +389,7 @@ export default function EmployeePage() {
             <p style={{ marginBottom: "15px" }}>{modal.text}</p>
 
             <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
-              <button className="checkout-button"
+              <button className="success-button"
                 onClick={() => { modal.action?.(); setModal({ open: false, text: "" }); }}>
                 Sí
               </button>
