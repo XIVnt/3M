@@ -78,7 +78,7 @@ export default function CartPage() {
       return;
     }
 
-    if (!payment) {
+    if (payment === null) {
       showToast("Selecciona método de pago", "error");
       return;
     }
