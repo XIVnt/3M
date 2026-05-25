@@ -26,15 +26,15 @@ export default function CartPage() {
   const [availableMethods, setAvailableMethods] = useState<number[]>([]);
 
   const MetodoPagoLabel: Record<number, string> = {
-    1: "Efectivo",
-    2: "Deuna API",
+    0: "Efectivo",
+    1: "Deuna API",
   };
     
   const [payment, setPayment] = useState<number | null>(null);
 
   const MetodoPagoIcon: Record<number, string> = {
-    1: "💵",
-    2: "💳",
+    0: "💵",
+    1: "💳",
   };
 
   const [orderSuccess, setOrderSuccess] = useState(false);
