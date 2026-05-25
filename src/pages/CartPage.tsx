@@ -231,7 +231,7 @@ export default function CartPage() {
       </div>
 
       {/* COMMENT BOX (APARECE SOLO SI HAY MÉTODO SELECCIONADO) */}
-      {payment && (
+      {payment !== null && (
         <div style={{ marginTop: "15px" }}>
           <textarea
             value={comment}
