@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { verifyRegister } from "../api/userService";
 
 export default function VerifyRegisterPage() {
@@ -8,8 +8,9 @@ export default function VerifyRegisterPage() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const email = sessionStorage.getItem("pendingEmail");
+  const email = location.state?.email;
 
   const handleVerify = async () => {
     if (!email) {
@@ -27,17 +28,32 @@ export default function VerifyRegisterPage() {
 
     try {
       await verifyRegister(email, code);
-
-      sessionStorage.removeItem("pendingEmail");
-
       navigate("/login");
-
     } catch (err: any) {
       setError(err?.response?.data || "Código inválido");
     } finally {
       setLoading(false);
     }
   };
+
+  // =========================
+  // 🔥 BLOQUE IMPORTANTE
+  // =========================
+  if (!email) {
+    return (
+      <div className="login-container">
+        <h2>Sesión inválida</h2>
+        <p>No hay email de verificación.</p>
+
+        <button
+          className="primary-btn"
+          onClick={() => navigate("/login")}
+        >
+          Volver al login
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="login-container">
