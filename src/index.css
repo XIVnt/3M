@@ -2163,13 +2163,7 @@ body, html {
 .policy-check {
   display: flex;
   gap: 8px;
-  align-items: flex-start;
-  line-height: 1.4;
-}
-
-.policy-check span {
-  flex: 1;
-  min-width: 0;
+  align-items: center;
 }
 
 .policy-link {
@@ -2188,20 +2182,22 @@ body, html {
 @media (max-width: 600px) {
   .policy-box {
     font-size: 12px;
+    margin: 8px 0;
   }
 
   .policy-check {
-    gap: 6px;
     align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
   }
 
   .policy-check input {
     margin-top: 3px;
-    flex-shrink: 0;
+    transform: scale(1.05);
   }
 
-  .policy-check span {
-    display: block;
+  .policy-link {
+    display: inline;
     word-break: break-word;
   }
 }
