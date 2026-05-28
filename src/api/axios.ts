@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://threembackend.onrender.com/api",
+  baseURL: "https://api.3mfood.es/api",
   timeout: 60000,
 });
 
@@ -70,7 +70,7 @@ api.interceptors.response.use(
       refreshAttempts++;
 
       refreshPromise = axios
-        .post("https://threembackend.onrender.com/api/usuarios/refresh-token", {
+        .post("https://api.3mfood.es/api/usuarios/refresh-token", {
           token: refreshToken,
         })
         .then((res) => {

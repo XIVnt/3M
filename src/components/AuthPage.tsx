@@ -4,7 +4,7 @@ import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-// ===================== 🔐 SANITIZER =====================
+
 const sanitize = (value: string) =>
   value.replace(/[<>]/g, "").trim();
 
@@ -58,7 +58,6 @@ export default function AuthPage() {
       const data = err?.response?.data;
       const status = err?.response?.status;
 
-      // 🔥 ESTE ES EL CASO CLAVE
       if (data?.requireCaptcha) {
         setRequireCaptcha(true);
         setError("Vuelve a intentar");

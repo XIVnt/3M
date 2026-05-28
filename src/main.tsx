@@ -13,7 +13,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <GoogleReCaptchaProvider
-      reCaptchaKey="6Lf4zvssAAAAAPS6DGEehuXlBN-03XRfdE5gKmP2"
+      reCaptchaKey="6LfZHwEtAAAAAEnMFCj7-KToTwN_Ga8_4YlRyFgC"
     >
       <AuthProvider>
         <CartProvider>
