@@ -2155,7 +2155,6 @@ body, html {
   opacity: 0.6;
   font-size: 12px;
 }
-
 .policy-box {
   margin: 10px 0;
   font-size: 13px;
@@ -2176,6 +2175,33 @@ body, html {
 .policy-link:hover {
   opacity: 0.8;
 }
+
+/* =========================
+   📱 MOBILE
+   ========================= */
+@media (max-width: 600px) {
+  .policy-box {
+    font-size: 12px;
+    margin: 8px 0;
+  }
+
+  .policy-check {
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.4;
+  }
+
+  .policy-check input {
+    margin-top: 3px;
+    transform: scale(1.05);
+  }
+
+  .policy-link {
+    display: inline;
+    word-break: break-word;
+  }
+}
+
 
 
 /* ==================== MEDIA QUERIES PARA MÓVILES ==================== */
