@@ -24,7 +24,7 @@ export default function AuthPage() {
   const { setToken } = useAuth();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const handleSubmit = async () => {
+  const handleLogin = async () => {
   if (loading) return;
 
   setError("");
@@ -76,12 +76,56 @@ export default function AuthPage() {
     }
   };
 
+  const handleRegister = async () => {
+    if (loading) return;
+
+    if (!acceptedPolicies) {
+      setError("Debes aceptar las políticas");
+      return;
+    }
+
+    setError("");
+    setLoading(true);
+
+    try {
+      const cleanEmail = sanitize(email).toLowerCase();
+      const cleanPassword = sanitize(password);
+
+      await api.post("/usuarios/request-register", {
+        email: cleanEmail,
+        userName: cleanEmail,
+        telefono,
+        password: cleanPassword,
+      });
+
+      navigate("/verify-register", {
+        state: {
+          email: cleanEmail,
+        },
+      });
+    } 
+    catch (err: any) {
+      setError(
+        err?.response?.data ||
+        "Error al registrar"
+      );
+    } 
+    finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <form
       className="login-container"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit();
+
+        if (mode === "login") {
+          handleLogin();
+        } else {
+          handleRegister();
+        }
       }}
     >
       <h2>{mode === "login" ? "Iniciar sesión" : "Registro"}</h2>
