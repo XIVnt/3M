@@ -35,9 +35,6 @@ export default function App() {
 
   const role = getUserRole(token);
 
-  console.log("ROLE REAL:", role);
-  console.log("TOKEN:", token);
-
   return (
     <Routes>
       {/* RUTAS CON LAYOUT */}

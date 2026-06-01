@@ -61,9 +61,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const decoded = jwtDecode<JwtPayload>(t);
         const extractedRoles = extractRoles(decoded);
 
-        console.log("DECODED TOKEN:", decoded);
-        console.log("ROLES:", extractedRoles);
-
         setRoles(extractedRoles);
         setTokenState(t);
       } catch (err) {

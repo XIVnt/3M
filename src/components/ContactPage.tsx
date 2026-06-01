@@ -39,19 +39,24 @@ export default function ContactPage() {
   const handleSend = () => {
     if (!selected || sending || !reason) return;
 
+    if (!selected.email || selected.email.trim() === "") {
+      alert("Este restaurante no tiene email configurado");
+      return;
+    }
+
     setSending(true);
 
-    const mailto = `mailto:${selected.email}?subject=${encodeURIComponent(
-      `Consulta cliente (${reason}) - ${selected.nombre}`
-    )}&body=${encodeURIComponent(
-      `Motivo: ${reason}\n\nEscribe tu mensaje aquí:\n`
-    )}`;
+    const subject = `Consulta cliente (${reason}) - ${selected.nombre}`;
 
-    window.location.href = mailto;
+    const body = `Motivo: ${reason}\n\nEscribe tu mensaje aquí:\n`;
+
+    const mailto = `mailto:${selected.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.open(mailto, "_self");
 
     setTimeout(() => {
       setSending(false);
-    }, 5000);
+    }, 3000);
   };
 
   return (

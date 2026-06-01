@@ -15,7 +15,7 @@ export default function ProductCard({
   loadingToggle,
 }: ProductCardProps) {
 
-  const { roles } = useAuth(); // ✅ dentro del componente
+  const { roles } = useAuth();
 
   const isAdmin =
     roles.includes("administrador") ||
@@ -23,8 +23,6 @@ export default function ProductCard({
 
   const isLoading = loadingToggle === product.id;
   const isDisabled = product.available === false;
-
-  console.log(roles)
 
   return (
     <div className={`product-card ${isDisabled ? "disabled" : ""}`}>

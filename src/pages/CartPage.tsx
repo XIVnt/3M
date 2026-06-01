@@ -112,8 +112,6 @@ export default function CartPage() {
       comentario: comment?.trim() ? comment.trim() : null,
     };
 
-    console.log("PAYLOAD:", payload);
-
     try {
       await api.post("/pedidos", payload, {
         timeout: 60000,
