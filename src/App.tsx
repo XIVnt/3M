@@ -15,6 +15,7 @@ import AdminPage from "./pages/AdminPage";
 import EmployeePage from "./pages/EmployeePage";
 import CartPage from "./pages/CartPage";
 import ContactPage from "./components/ContactPage"
+import ScrollToTop from "./hooks/ScrollToTop";
 
 // AUTH PAGES
 import VerifyRegisterPage from "./components/Verify-register";
@@ -39,6 +40,7 @@ export default function App() {
 
   return (
     <AnimatePresence mode="wait">
+      <ScrollToTop />
       <Routes location={location} key={location.pathname}>
         {/* RUTAS CON LAYOUT */}
         <Route element={<Layout />}>
