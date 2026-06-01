@@ -169,13 +169,15 @@ export default function DeliveryMap({
 
         <LocationPicker onSelect={onSelect} disabled={isRecoger} />
       </MapContainer>
-      <div style={{ marginTop: 10 }}>
-        {isInside ? (
-          <p style={{ color: "green" }}>✔ Dirección válida</p>
-        ) : (
-          <p style={{ color: "red" }}>❌ Fuera de rango</p>
-        )}
-      </div>
+      {!isRecoger && location && (
+        <div style={{ marginTop: 10 }}>
+          {isInside ? (
+            <p style={{ color: "green" }}>✔ Dirección válida</p>
+          ) : (
+            <p style={{ color: "red" }}>❌ Fuera de rango</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
