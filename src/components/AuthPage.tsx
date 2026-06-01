@@ -46,10 +46,10 @@ export default function AuthPage() {
     if (!password) {
       errors.password = "La contraseña es obligatoria";
     } else if (
-      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password)
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/.test(password)
     ) {
       errors.password =
-        "Mínimo 8 caracteres, mayúscula, minúscula, número y símbolo";
+        "Mínimo 6 caracteres, mayúscula, minúscula, número y símbolo";
     }
 
     if (mode === "register") {
