@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyRegister } from "../api/userService";
+import { useToast } from "../context/ToastContext";
 
 export default function VerifyRegisterPage() {
   const [code, setCode] = useState("");
@@ -11,6 +12,9 @@ export default function VerifyRegisterPage() {
   const location = useLocation();
 
   const email = location.state?.email;
+
+  const { showToast } = useToast();
+
 
   const handleVerify = async () => {
     if (!email) {
@@ -28,6 +32,9 @@ export default function VerifyRegisterPage() {
 
     try {
       await verifyRegister(email, code);
+
+      showToast("Registro completado 🎉 Ahora puedes iniciar sesión", "success");
+
       navigate("/login");
     } catch (err: any) {
       setError(err?.response?.data || "Código inválido");

@@ -4,6 +4,8 @@ import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
+import { useToast } from "../context/ToastContext";
+
 const sanitize = (value: string) =>
   value.replace(/[<>]/g, "").trim();
 
@@ -18,6 +20,8 @@ export default function AuthPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { showToast } = useToast();
 
   const [fieldErrors, setFieldErrors] = useState<{
     email?: string;
@@ -97,6 +101,8 @@ export default function AuthPage() {
       setToken(res.data.token);
       localStorage.setItem("refreshToken", res.data.refreshToken);
 
+      showToast("Bienvenido 👋", "success");
+
       setRequireCaptcha(false);
       navigate("/");
     } catch (err: any) {
@@ -146,6 +152,8 @@ export default function AuthPage() {
         telefono,
         password: cleanPassword,
       });
+
+      showToast("Código enviado a tu correo 📩", "success");
 
       navigate("/verify-register", {
         state: { email: cleanEmail },
