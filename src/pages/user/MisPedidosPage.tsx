@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/axios";
 import { getMisFacturas } from "../../api/facturaService";
 import { cancelarPedido } from "../../api/pedidosService";
+import { motion } from "framer-motion";
 
 const TAKE = 10;
 
@@ -24,8 +25,8 @@ export default function MisPedidos() {
   const [tab, setTab] = useState<"pedidos" | "facturas">("pedidos");
 
   const [skip, setSkip] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [, setHasMore] = useState(true);
+  const [, setLoading] = useState(false);
 
   const [view, setView] = useState<ViewMode>({ mode: "list" });
 
@@ -180,6 +181,12 @@ export default function MisPedidos() {
   // ================= DETALLE PEDIDO =================
   if (view.mode === "pedido") {
     return (
+      <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+      >
       <div className="orders-page">
 
         <button
@@ -247,12 +254,19 @@ export default function MisPedidos() {
         </div>
 
       </div>
+      </motion.div>
     );
   }
 
   // ================= DETALLE FACTURA =================
   if (view.mode === "factura") {
     return (
+      <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
       <div className="orders-page">
 
         <button
@@ -382,11 +396,18 @@ export default function MisPedidos() {
         </div>
 
       </div>
+      </motion.div>
     );
   }
 
   // ================= LISTA =================
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="orders-layout">
 
       {tab === "pedidos" && (
@@ -535,5 +556,6 @@ export default function MisPedidos() {
 
       </div>
     </div>
+    </motion.div>
   );
 }

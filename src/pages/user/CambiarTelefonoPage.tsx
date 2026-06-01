@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { changePhone } from "../../api/userService";
 import { useToast } from "../../context/ToastContext";
+import { motion } from "framer-motion";
 
 export default function CambiarTelefono() {
   const [telefono, setTelefono] = useState("");
@@ -18,6 +19,12 @@ export default function CambiarTelefono() {
   };
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="cp-form-container">
       <h2 className="cp-title">📱 Cambiar teléfono</h2>
 
@@ -85,5 +92,6 @@ export default function CambiarTelefono() {
         }
       `}</style>
     </div>
+    </motion.div>
   );
 }

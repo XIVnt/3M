@@ -1,5 +1,13 @@
+import { motion } from "framer-motion";
+
 export default function UsePolicy() {
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="policy-container">
       <h1>📜 Términos y Condiciones de Uso</h1>
 
@@ -103,5 +111,6 @@ export default function UsePolicy() {
         Última actualización: {new Date().getFullYear()}
       </p>
     </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getMasVendidos } from "../api/productService";
+import { motion } from "framer-motion";
 
 type Product = {
   productoId: number;
@@ -30,6 +31,12 @@ export default function Home() {
   }, []);
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="home-container">
       
       <section className="welcome-section">
@@ -65,5 +72,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </motion.div>
   );
 }

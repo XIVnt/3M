@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyRegister } from "../api/userService";
 import { useToast } from "../context/ToastContext";
+import { motion } from "framer-motion";
 
 export default function VerifyRegisterPage() {
   const [code, setCode] = useState("");
@@ -63,6 +64,12 @@ export default function VerifyRegisterPage() {
   }
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="login-container">
       <h2>Verificar código OTP</h2>
 
@@ -94,5 +101,6 @@ export default function VerifyRegisterPage() {
         Volver
       </button>
     </div>
+    </motion.div>
   );
 }

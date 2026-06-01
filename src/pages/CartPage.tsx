@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../context/ToastContext";
+import { motion } from "framer-motion";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { getMetodosPago } from "../api/pedidosService";
@@ -166,6 +167,12 @@ export default function CartPage() {
   }
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="cart-list step-wrapper">
       <h2>🛒 Tu pedido</h2>
 
@@ -263,5 +270,6 @@ export default function CartPage() {
         </button>
       </div>
     </div>
+    </motion.div>
   );
 }

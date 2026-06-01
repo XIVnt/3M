@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyOtp } from "../api/userService";
+import { motion } from "framer-motion";
 
 export default function VerifyOtpPage() {
   const [code, setCode] = useState("");
@@ -50,6 +51,12 @@ export default function VerifyOtpPage() {
   };
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="login-container">
       <h2>Verificación de seguridad</h2>
 
@@ -83,5 +90,6 @@ export default function VerifyOtpPage() {
         Volver
       </button>
     </div>
+    </motion.div>
   );
 }

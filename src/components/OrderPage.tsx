@@ -10,6 +10,9 @@ import {
   toggleEstadoProducto,
   getProductosByRestaurante,
 } from "../api/productService";
+
+import { motion } from "framer-motion";
+
 import { useCart } from "../context/CartContext";
 import DeliveryMap from "./DeliveryMap";
 import { getRestaurantes } from "../api/restaurantService";
@@ -87,7 +90,7 @@ export default function OrderPage() {
   const [locationConfirmed, setLocationConfirmed] =
     useState(false);
 
-  const [mapMsg, setMapMsg] = useState<{
+  const [, setMapMsg] = useState<{
     text: string;
     type: "ok" | "error" | null;
   }>({
@@ -274,6 +277,12 @@ const canShowMenu =
   if (!canShowMenu) {
 
     return (
+      <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
       <div className="step-wrapper" style={{ textAlign: "center" }}>
 
         <h2>🍽️ Antes de empezar tu pedido</h2>
@@ -498,6 +507,7 @@ const canShowMenu =
         ))}
 
       </div>
+      </motion.div>
     );
   }
 
@@ -505,6 +515,12 @@ const canShowMenu =
   // MENU
   // =========================
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="order-page-container">
 
       <aside className="category-sidebar">
@@ -548,5 +564,6 @@ const canShowMenu =
       </main>
 
     </div>
+    </motion.div>
   );
 }

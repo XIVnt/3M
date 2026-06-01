@@ -1,5 +1,6 @@
 import type { Product } from "./types/Product";
 import { useAuth } from "../context/AuthContext";
+import { motion } from "framer-motion";
 
 type ProductCardProps = {
   product: Product;
@@ -25,6 +26,12 @@ export default function ProductCard({
   const isDisabled = product.available === false;
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className={`product-card ${isDisabled ? "disabled" : ""}`}>
 
       <img
@@ -73,5 +80,6 @@ export default function ProductCard({
         </button>
       )}
     </div>
+    </motion.div>
   );
 }

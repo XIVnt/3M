@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMyProfile } from "../../api/userService";
+import { motion } from "framer-motion";
 
 export default function ProfilePanel() {
   const [user, setUser] = useState<any>(null);
@@ -22,6 +23,12 @@ export default function ProfilePanel() {
   }
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="profile-container">
 
       <div className="profile-card">
@@ -134,5 +141,6 @@ export default function ProfilePanel() {
       `}</style>
 
     </div>
+    </motion.div>
   );
 }

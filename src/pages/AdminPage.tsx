@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 
 import {
   getProductosByRestaurante,
@@ -556,8 +558,14 @@ export default function AdminPage() {
 
   // ===================== UI =====================
   return (
-    <div className="admin-layout">
+     <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
 
+    <div className="admin-layout">
       <aside className="admin-sidebar">
         <h2 className="admin-title">Admin</h2>
 
@@ -1083,5 +1091,6 @@ export default function AdminPage() {
         )}
       </main>
     </div>
+    </motion.div>
   );
 }

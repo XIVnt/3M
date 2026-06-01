@@ -101,6 +101,8 @@ export default function EmployeePage() {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  const [search, setSearch] = useState("");
+
   const [modal, setModal] = useState<{
     open: boolean;
     action?: () => void;
@@ -178,9 +180,29 @@ export default function EmployeePage() {
   const hoy = new Date().toDateString();
 
   const pedidosFiltrados = pedidos.filter((p: any) => {
+
+    const searchTrim = search.trim().toLowerCase();
+
+    const isIdSearch = searchTrim.startsWith("#");
+    const idNumber = isIdSearch ? Number(searchTrim.replace("#", "")) : null;
+
+    const matchSearch =
+      searchTrim === "" ||
+      (isIdSearch && p.id === idNumber) ||
+      (!isIdSearch &&
+        (
+          p.email?.toLowerCase().includes(searchTrim) ||
+          p.telefono?.includes(searchTrim) ||
+          String(p.id).includes(searchTrim)
+        )
+      );
+    
+    if (!matchSearch) return false;
+    
     const fecha = new Date(p.fecha).toDateString();
     const estado = Number(p.estadoPedido);
     const estadoPago = getEstadoPagoText(p.estadoPago);
+
 
     // ✅ CANCELADOS SOLO EN SU CATEGORÍA
     if (estado === EstadoPedido.Cancelado && filtro !== "cancelados") {
@@ -258,6 +280,23 @@ export default function EmployeePage() {
             👨‍🍳 Panel de Empleado
           </h1>
 
+          <input
+            type="text"
+            placeholder="🔎 Buscar pedido por ID, email o teléfono..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              padding: "10px",
+              marginBottom: "15px",
+              width: "100%",
+              maxWidth: "400px",
+              borderRadius: "8px",
+              border: "1px solid #9333ea",
+              background: "#12121a",
+              color: "white",
+            }}
+          />
+
           {loading ? (
             <p>Cargando pedidos...</p>
           ) : pedidosFiltrados.length === 0 ? (
@@ -271,7 +310,7 @@ export default function EmployeePage() {
                   const estadoPago = getEstadoPagoText(p.estadoPago);
 
                   return (
-                    <div className="product-card" key={p.id}>
+                    <div className="product-card employee-order-card" key={p.id}>
                       <div className="product-title">Pedido #{p.id}</div>
 
                       <div className="product-description">

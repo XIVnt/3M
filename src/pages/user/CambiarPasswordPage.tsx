@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../../api/axios";
 import { useToast } from "../../context/ToastContext";
+import { motion } from "framer-motion";
 
 export default function CambiarPassword() {
   const [current, setCurrent] = useState("");
@@ -25,6 +26,12 @@ export default function CambiarPassword() {
   };
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <div className="cp-form-container">
       <h2 className="cp-title">🔐 Cambiar contraseña</h2>
 
@@ -102,5 +109,6 @@ export default function CambiarPassword() {
         }
       `}</style>
     </div>
+    </motion.div>
   );
 }

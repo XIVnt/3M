@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { motion } from "framer-motion";
 
 import { useToast } from "../context/ToastContext";
 
@@ -169,6 +170,12 @@ export default function AuthPage() {
   // UI
   // -----------------------------
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.25 }}
+    >
     <form
       className="login-container"
       onSubmit={(e) => {
@@ -283,5 +290,6 @@ export default function AuthPage() {
           : "¿Ya tienes cuenta? Inicia sesión"}
       </p>
     </form>
+    </motion.div>
   );
 }
