@@ -768,7 +768,6 @@ body, html {
   padding: 80px 20px;
   display: flex;
   flex-direction: column;
-  gap: 80px;
 }
 
 /* ================= HERO ================= */
