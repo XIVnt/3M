@@ -792,14 +792,16 @@ body, html {
 
 /* ================= BLOCK BASE ================= */
 .about-block {
-  max-width: 1100px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
 }
 
 .about-card {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
 
   padding: 40px;
   border-radius: 20px;
