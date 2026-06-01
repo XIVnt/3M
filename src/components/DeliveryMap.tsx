@@ -113,7 +113,7 @@ export default function DeliveryMap({
   }, [location, restaurante]);
 
   return (
-    <div style={{ width: "100%", marginTop: 10 }}>
+    <div style={{ width: "100%", height: "100%" }}>
 
       <MapContainer
         center={[restaurante.lat, restaurante.lng]}

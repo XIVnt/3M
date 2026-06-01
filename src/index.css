@@ -987,6 +987,8 @@ body, html {
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid #22c55e;
+  margin-bottom: 10px;
+  height: 93%;
 }
 
 /* =========================
