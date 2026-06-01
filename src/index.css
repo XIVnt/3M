@@ -140,6 +140,7 @@ body, html {
   display:flex;
   flex-direction:column;
   align-items:center;
+  padding-bottom: 14px;
 }
 
 .product-card:hover{
@@ -1634,6 +1635,7 @@ body, html {
 
   .app-footer {
     padding: 14px 16px;
+    margin-bottom: -30px;
   }
 }
 
