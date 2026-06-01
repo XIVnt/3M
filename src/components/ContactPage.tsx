@@ -15,7 +15,8 @@ type Restaurante = {
 export default function ContactPage() {
   const [restaurantes, setRestaurantes] = useState<Restaurante[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [message, setMessage] = useState("");
+  const [reason, setReason] = useState("");
+  const [sending, setSending] = useState(false);
 
   const selected = restaurantes.find(r => r.id === selectedId);
 
@@ -36,13 +37,21 @@ export default function ContactPage() {
   }, []);
 
   const handleSend = () => {
-    if (!selected) return;
+    if (!selected || sending || !reason) return;
 
-    const mailto = `mailto:${selected.email}?subject=Consulta cliente - ${selected.nombre}&body=${encodeURIComponent(
-      message
+    setSending(true);
+
+    const mailto = `mailto:${selected.email}?subject=${encodeURIComponent(
+      `Consulta cliente (${reason}) - ${selected.nombre}`
+    )}&body=${encodeURIComponent(
+      `Motivo: ${reason}\n\nEscribe tu mensaje aquí:\n`
     )}`;
 
     window.location.href = mailto;
+
+    setTimeout(() => {
+      setSending(false);
+    }, 5000);
   };
 
   return (
@@ -50,7 +59,7 @@ export default function ContactPage() {
 
       <h1 className="contact-title">📩 Contacto</h1>
 
-      {/* SELECT */}
+      {/* SELECT RESTAURANTE */}
       <div className="contact-card">
         <label>Selecciona restaurante</label>
 
@@ -110,14 +119,32 @@ export default function ContactPage() {
           <strong>vega.micky10@gmail.com</strong> para soporte o información general.
         </p>
 
-        <textarea
-          placeholder="Escribe tu consulta..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+        {/* MOTIVO (ANTES ERA TEXTAREA) */}
+        <select
+          className="contact-select"
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+        >
+          <option value="">-- Selecciona motivo --</option>
+          <option value="Pedido">Problema con un pedido</option>
+          <option value="Reparto">Reparto / entrega</option>
+          <option value="Pago">Problema de pago</option>
+          <option value="Restaurante">Información del restaurante</option>
+          <option value="Soporte">Soporte técnico</option>
+          <option value="Otro">Otro</option>
+        </select>
 
-        <button className="contact-button" onClick={handleSend}>
-          Enviar correo 📩
+        <button
+          className="contact-button"
+          onClick={handleSend}
+          disabled={sending || !selected || !reason}
+          style={{
+            marginTop: "15px",
+            opacity: sending || !reason ? 0.5 : 1,
+            cursor: sending || !reason ? "not-allowed" : "pointer"
+          }}
+        >
+          {sending ? "Enviando..." : "Abrir correo 📩"}
         </button>
       </div>
 
