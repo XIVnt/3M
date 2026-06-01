@@ -1221,6 +1221,18 @@ body, html {
   transform: scale(0.98);
 }
 
+.input-error {
+  border: 1px solid #ff4d4f !important;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.field-error {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+
 /* CartPage */
 
 .option-group {
