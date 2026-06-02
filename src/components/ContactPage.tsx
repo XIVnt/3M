@@ -49,7 +49,7 @@ export default function ContactPage() {
 
     const subject = `Consulta cliente (${reason}) - ${selected.nombre}`;
 
-    const body = `Motivo: ${reason}\n\nEscribe tu mensaje aquí:\n`;
+    const body = ``;
 
     const mailto = `mailto:${selected.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
