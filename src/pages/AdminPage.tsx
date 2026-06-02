@@ -19,6 +19,7 @@ import {
   blockUser,
   unblockUser,
   assignEmployee,
+  sendSupportEmail,
 } from "../api/userService";
 
 import {
@@ -91,6 +92,7 @@ export default function AdminPage() {
     | "createRestaurante"
     | "metodosPago"
     | "editUser"
+    | "sendEmail"
   >("list");
 
   const [actionLoading, setActionLoading] = useState(false);
@@ -142,6 +144,10 @@ export default function AdminPage() {
   const [editTelefono, setEditTelefono] = useState("");
   const [editPassword, setEditPassword] = useState("");
 
+  // ===================== SEND EMAIL =====================
+  const [emailTo, setEmailTo] = useState("");
+  const [emailSubject, setEmailSubject] = useState("");
+  const [emailMessage, setEmailMessage] = useState("");
 
   // ===================== INIT =====================
   useEffect(() => {
@@ -596,6 +602,37 @@ export default function AdminPage() {
     }
   };
 
+  // ===================== SEND EMAIL =====================
+  const handleSendEmail = async () => {
+    if (
+      !emailTo.trim() ||
+      !emailSubject.trim() ||
+      !emailMessage.trim()
+    ) {
+      showToast("❌ Completa todos los campos", "error");
+      return;
+    }
+
+    try {
+      await sendSupportEmail({
+        EmailDestino: emailTo,
+        Asunto: emailSubject,
+        Mensaje: emailMessage,
+      });
+
+      showToast("📨 Correo enviado", "success");
+
+      setEmailTo("");
+      setEmailSubject("");
+      setEmailMessage("");
+
+      setView("users");
+    } catch (err) {
+      console.error(err);
+      showToast("❌ Error enviando correo", "error");
+    }
+  };
+
   // ===================== UI =====================
   return (
      <motion.div
@@ -662,6 +699,14 @@ export default function AdminPage() {
           onClick={() => setView("metodosPago")}
         >
           💳 Métodos de Pago
+        </button>
+        <button
+          className={`admin-nav-btn ${
+            view === "sendEmail" ? "active" : ""
+          }`}
+          onClick={() => setView("sendEmail")}
+        >
+          📨 Enviar Correo
         </button>
       </aside>
 
@@ -1157,6 +1202,50 @@ export default function AdminPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+        {/* ===================== SEND EMAIL ===================== */}
+        {view === "sendEmail" && (
+          <div className="admin-card">
+            <h2>Enviar correo</h2>
+
+            <div className="form">
+              <input
+                className="input"
+                placeholder="Correo destinatario"
+                value={emailTo}
+                onChange={(e) => setEmailTo(e.target.value)}
+              />
+
+              <input
+                className="input"
+                placeholder="Asunto"
+                value={emailSubject}
+                onChange={(e) => setEmailSubject(e.target.value)}
+              />
+
+              <textarea
+                className="input"
+                placeholder="Mensaje"
+                value={emailMessage}
+                onChange={(e) => setEmailMessage(e.target.value)}
+                rows={8}
+              />
+
+              <button
+                className="primary-btn"
+                onClick={handleSendEmail}
+              >
+                📨 Enviar correo
+              </button>
+
+              <button
+                className="icon-btn"
+                onClick={() => setView("users")}
+              >
+                ↩ Volver
+              </button>
             </div>
           </div>
         )}

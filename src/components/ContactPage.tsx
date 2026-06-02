@@ -128,7 +128,7 @@ export default function ContactPage() {
 
         <p className="contact-note">
           También puedes escribir directamente a{" "}
-          <strong>vega.micky10@gmail.com</strong> para soporte o información general.
+          <strong>support@3mfood.com</strong> para soporte o información general.
         </p>
 
         {/* MOTIVO (ANTES ERA TEXTAREA) */}

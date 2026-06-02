@@ -183,6 +183,22 @@ export const getMyProfile = () => {
   return api.get("/usuarios/me");
 };
 
+// =========================
+// SUPPORT EMAIL
+// =========================
+
+export interface SendSupportEmailDto {
+  EmailDestino: string;
+  Asunto: string;
+  Mensaje: string;
+}
+
+export const sendSupportEmail = (
+  data: SendSupportEmailDto
+) => {
+  return api.post("/usuarios/enviar-correo", data);
+};
+
 export const assignEmployee = (
   userId: string,
   restauranteId: number
