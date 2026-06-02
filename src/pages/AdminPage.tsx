@@ -90,6 +90,7 @@ export default function AdminPage() {
     | "restaurantes"
     | "createRestaurante"
     | "metodosPago"
+    | "editUser"
   >("list");
 
   const [actionLoading, setActionLoading] = useState(false);
@@ -123,7 +124,7 @@ export default function AdminPage() {
 
   const [metodosPago, setMetodosPago] = useState<MetodoPagoDTO[]>([]);
 
-// ===================== PAY METHOT =====================
+  // ===================== PAY METHOT =====================
   const [loadingMetodosPago, setLoadingMetodosPago] = useState(false);
 
   const allowedRoles = ["administrador", "empleado"];
@@ -132,6 +133,15 @@ export default function AdminPage() {
   const [userFilter] = useState<
     "all" | "administrador" | "empleado" | "cliente"
   >("all");
+
+
+  // ===================== EDIT USER =====================
+  const [editingUser, setEditingUser] = useState<UserApi | null>(null);
+
+  const [, setEditUserName] = useState("");
+  const [editTelefono, setEditTelefono] = useState("");
+  const [editPassword, setEditPassword] = useState("");
+
 
   // ===================== INIT =====================
   useEffect(() => {
@@ -439,7 +449,11 @@ export default function AdminPage() {
   const handleBlockUser = async (id: string) => {
     await blockUser(id);
 
-    await loadUsers();
+    setUsers(prev =>
+      prev.map(u =>
+        u.id === id ? { ...u, isLocked: true } : u
+      )
+    );
 
     showToast("🚫 Usuario bloqueado", "info");
   };
@@ -447,7 +461,11 @@ export default function AdminPage() {
   const handleUnblockUser = async (id: string) => {
     await unblockUser(id);
 
-    await loadUsers();
+    setUsers(prev =>
+      prev.map(u =>
+        u.id === id ? { ...u, isLocked: false } : u
+      )
+    );
 
     showToast("✅ Usuario desbloqueado", "info");
   };
@@ -540,20 +558,42 @@ export default function AdminPage() {
   };
 
   // ===================== EDIT USER =====================
-  const handleEditUser = async (id: string) => {
-    const userName = prompt("Nuevo username:");
-    const telefono = prompt("Nuevo teléfono:");
+  const openEditUser = (user: UserApi) => {
+    setEditingUser(user);
+    setEditUserName(user.userName ?? "");
+    setEditTelefono(user.telefono ?? "");
+    setView("editUser");
+  };
 
-    if (!userName && !telefono) {
-      return;
+  const goBackToUsers = () => {
+    setView("users");
+    setEditingUser(null);
+    setEditUserName("");
+    setEditTelefono("");
+  };
+
+  const handleUpdateUser = async () => {
+    
+    try {
+      if (!editingUser?.userName) {
+        showToast("Usuario inválido", "error");
+        return;
+      }
+
+      await updateUser(editingUser.userName, {
+        telefono: editTelefono,
+        password: editPassword,
+      });
+
+      showToast("✅ Usuario actualizado", "success");
+
+      await loadUsers();
+
+      goBackToUsers();
+    } catch (err) {
+      console.error(err);
+      showToast("❌ Error actualizando usuario", "error");
     }
-
-    await updateUser(id, {
-      userName: userName ?? undefined,
-      telefono: telefono ?? undefined,
-    });
-
-    await loadUsers();
   };
 
   // ===================== UI =====================
@@ -955,9 +995,7 @@ export default function AdminPage() {
 
                       <button
                         className="icon-btn"
-                        onClick={() =>
-                          handleEditUser(u.id)
-                        }
+                        onClick={() => openEditUser(u)}
                       >
                         ✏️
                       </button>
@@ -965,6 +1003,39 @@ export default function AdminPage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {/* ===================== EDIT USER PAGE ===================== */}
+        {view === "editUser" && editingUser && (
+          <div className="admin-card">
+            <h2>Editar usuario</h2>
+
+            <p className="muted">{editingUser.userName}</p>
+
+            <div className="form">
+              <input
+                className="input"
+                placeholder="Password"
+                value={editPassword}
+                onChange={(e) => setEditPassword(e.target.value)}
+              />
+
+              <input
+                className="input"
+                placeholder="Teléfono"
+                value={editTelefono}
+                onChange={(e) => setEditTelefono(e.target.value)}
+              />
+
+              <button className="primary-btn" onClick={handleUpdateUser}>
+                💾 Guardar cambios
+              </button>
+
+              <button className="icon-btn" onClick={goBackToUsers}>
+                ↩ Volver
+              </button>
             </div>
           </div>
         )}

@@ -195,6 +195,7 @@ export default function AuthPage() {
       {fieldErrors.email && (
         <p className="field-error">{fieldErrors.email}</p>
       )}
+      <p className="field-error" onClick={() => navigate("/forgot-helper")}>Has olvidado tu contraseña?</p>
 
       {/* PASSWORD */}
       <input

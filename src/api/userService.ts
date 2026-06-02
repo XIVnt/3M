@@ -60,8 +60,8 @@ export const searchUsers = (q: string, page = 1, pageSize = 20) => {
 // =========================
 // UPDATE USER
 // =========================
-export const updateUser = (id: string, data: UpdateUserDto) => {
-  return api.put(`/usuarios/${encodeURIComponent(id)}`, data);
+export const updateUser = (userName: string, data: any) => {
+  return api.put(`/usuarios/update/${userName}`, data);
 };
 
 // =========================

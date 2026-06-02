@@ -20,6 +20,9 @@ import ScrollToTop from "./hooks/ScrollToTop";
 // AUTH PAGES
 import VerifyRegisterPage from "./components/Verify-register";
 import VerifyOtpPage from "./components/VerifyOtpPage";
+import ForgotHelper from "./components/ForgotHelper";
+import ResetPasswordOtpPage from "./components/ResetPasswordOtp";
+import NotFound from "./components/NotFound";
 
 // USER PAGES
 import MisPedidosPage from "./pages/user/MisPedidosPage";
@@ -44,6 +47,8 @@ export default function App() {
       <Routes location={location} key={location.pathname}>
         {/* RUTAS CON LAYOUT */}
         <Route element={<Layout />}>
+          <Route path="*" element={<NotFound />} />
+
           <Route path="/" element={<Home />} />
           <Route path="/pedir" element={<OrderPage />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
@@ -119,6 +124,17 @@ export default function App() {
 
         {/* FALLBACK */}
         <Route path="*" element={<Home />} />
+
+        <Route
+          path="/forgot-helper"
+          element={<ForgotHelper />}
+        />
+
+        <Route
+          path="/reset-password"
+          element={<ResetPasswordOtpPage />}
+        />
+
       </Routes>
     </AnimatePresence>
   );
