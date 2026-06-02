@@ -71,7 +71,7 @@ export default function ResetPasswordOtp() {
         "success"
       );
 
-      navigate("/auth");
+      navigate("/login");
     } catch (err: any) {
       setError(
         err?.response?.data ||
