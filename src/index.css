@@ -179,8 +179,6 @@ body{
   font-size: 1.3rem;
 
   transition: all 0.25s ease;
-
-  border: 1px solid rgba(255,255,255,0.12);
   background: #0f0f14;
 }
 
@@ -244,35 +242,43 @@ body{
 
 /* VARIANTES DE COLORES (marcos) */
 .category-card.hamburguesas {
+  border: 1px solid rgba(168, 85, 247, 0.9);
+
   box-shadow:
-    0 0 10px rgba(168, 85, 247, 0.5),
-    0 0 35px rgba(168, 85, 247, 0.45),
-    0 0 60px rgba(168, 85, 247, 0.25),
-    inset 0 0 15px rgba(168, 85, 247, 0.2);
+    0 0 6px rgba(168, 85, 247, 0.6),
+    0 0 18px rgba(168, 85, 247, 0.5),
+    0 0 40px rgba(168, 85, 247, 0.35),
+    inset 0 0 10px rgba(168, 85, 247, 0.25);
 }
 
 .category-card.menestras {
+  border: 1px solid rgba(34, 197, 94, 0.9);
+
   box-shadow:
-    0 0 10px rgba(34, 197, 94, 0.3),
-    0 0 35px  rgba(34, 197, 94, 0.45),
-    0 0 60px rgba(34, 197, 94, 0.25),
-    inset 0 0 15px rgba(34, 197, 94, 0.2);
+    0 0 10px rgba(34, 197, 94, 0.6),
+    0 0 35px  rgba(34, 197, 94, 0.5),
+    0 0 60px rgba(34, 197, 94, 0.35),
+    inset 0 0 15px rgba(34, 197, 94, 0.25);
 }
 
 .category-card.bebidas {
+  border: 1px solid rgba(249, 115, 22, 0.9);
+
   box-shadow:
-    0 0 10px rgba(249, 115, 22, 0.3),
-    0 0 35px  rgba(249, 115, 22, 0.45),
-    0 0 60px rgba(249, 115, 22, 0.25),
-    inset 0 0 15px rgba(249, 115, 22, 0.2);
+    0 0 10px rgba(249, 115, 22, 0.6),
+    0 0 35px  rgba(249, 115, 22, 0.5),
+    0 0 60px rgba(249, 115, 22, 0.35),
+    inset 0 0 15px rgba(249, 115, 22, 0.25);
 }
 
 .category-card.pinchos {
+  border: 1px solid rgba(6, 182, 212, 0.9);
+
   box-shadow:
-    0 0 10px rgba(6, 182, 212, 0.3),
-    0 0 35px  rgba(6, 182, 212, 0.45),
-    0 0 60px rgba(6, 182, 212, 0.25),
-    inset 0 0 15px rgba(6, 182, 212, 0.2);
+    0 0 10px rgba(6, 182, 212, 0.6),
+    0 0 35px  rgba(6, 182, 212, 0.5),
+    0 0 60px rgba(6, 182, 212, 0.35),
+    inset 0 0 15px rgba(6, 182, 212, 0.25);
 }
 
 

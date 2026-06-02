@@ -170,7 +170,7 @@ export default function Home() {
                 </p>
 
                 <p className="product-sales">
-                  🔥 {product.cantidadVendida} vendidos
+                  🔥 {product.cantidadVendida} vendidos en línea
                 </p>
 
                 <button
