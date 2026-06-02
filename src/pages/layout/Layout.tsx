@@ -283,7 +283,7 @@ export default function Layout() {
 
             <div className="footer-right">
               <button className="footer-link">
-                v1.0.1
+                v1.0.2
               </button>
             </div>
           </div>
