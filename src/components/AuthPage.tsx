@@ -34,6 +34,7 @@ export default function AuthPage() {
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
@@ -207,12 +208,14 @@ export default function AuthPage() {
       {fieldErrors.email && (
         <p className="field-error">{fieldErrors.email}</p>
       )}
-      <p
-        className="forgot-password-link"
-        onClick={() => navigate("/forgot-helper")}
-      >
-       ¿Has olvidado tu contraseña?
-      </p>
+      {mode === "login" && (
+        <p
+          className="forgot-password-link"
+          onClick={() => navigate("/forgot-helper")}
+        >
+        ¿Has olvidado tu contraseña?
+        </p>
+      )}
 
       {/* PASSWORD */}
       <div className="password-wrapper">
@@ -282,17 +285,56 @@ export default function AuthPage() {
           <input
             className={`input ${fieldErrors.confirmPassword ? "input-error" : ""}`}
             placeholder="Repite la contraseña"
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
 
-          <span
-            className="eye"
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {showPassword ? "🙈" : "👁️"}
-          </span>
+          <span className="eye"onClick={() => setShowConfirmPassword((prev) => !prev)}>
+          {showConfirmPassword ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 3l18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M10.58 10.58A2 2 0 0012 14a2 2 0 001.42-.58"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M9.88 4.24A10.94 10.94 0 0112 4c5 0 9.27 3.11 11 8
+                  a11.64 11.64 0 01-2.06 3.4"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <path
+                d="M6.61 6.61A11.75 11.75 0 001 12c1.73 5 6 8 11 8
+                  a10.94 10.94 0 005.12-1.28"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          )}
+        </span>
         </div>
 
         {fieldErrors.confirmPassword && (
