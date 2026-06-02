@@ -1751,6 +1751,53 @@ body, html {
   margin-top: 4px;
 }
 
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper .input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.eye {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.eye:hover {
+  opacity: 1;
+}
+
+.forgot-password-link {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #a78bfa; /* morado suave */
+  cursor: pointer;
+  text-align: right;
+  transition: all 0.2s ease;
+  user-select: none;
+  opacity: 0.85;
+}
+
+.forgot-password-link:hover {
+  color: #c084fc;
+  opacity: 1;
+  text-decoration: underline;
+  transform: translateX(2px);
+}
+
+.forgot-password-link:active {
+  transform: scale(0.98);
+  opacity: 0.7;
+}
 
 /* CartPage */
 

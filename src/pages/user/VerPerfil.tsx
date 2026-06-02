@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import { getMyProfile } from "../../api/userService";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePanel() {
   const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const load = async () => {
-      const res = await getMyProfile();
-      setUser(res.data);
+      try {
+        const res = await getMyProfile();
+        setUser(res.data);
+      } catch (err: any) {
+        if (err?.response?.status === 401) {
+          navigate("/login", { replace: true });
+        }
+      }
     };
 
     load();
   }, []);
 
   if (!user) {
-    return (
-      <div className="profile-loading">
-        Cargando perfil...
-      </div>
-    );
+    return <div className="profile-loading">Cargando perfil...</div>;
   }
 
   return (

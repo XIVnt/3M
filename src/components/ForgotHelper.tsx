@@ -80,7 +80,7 @@ export default function ForgotHelper() {
 
         <button
           className="secondary-btn"
-          onClick={() => navigate("/auth")}
+          onClick={() => navigate("/")}
           disabled={loading}
         >
           Volver

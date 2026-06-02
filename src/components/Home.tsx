@@ -61,7 +61,7 @@ export default function Home() {
 
               <button
                 className="secondary-btn"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/ver-perfil")}
               >
                 Mi cuenta
               </button>
