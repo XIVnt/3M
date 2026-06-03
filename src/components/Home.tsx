@@ -166,7 +166,7 @@ export default function Home() {
                 </h3>
 
                 <p className="product-price">
-                  {product.precio.toFixed(2)} €
+                  {product.precio.toFixed(2)} $
                 </p>
 
                 <p className="product-sales">
